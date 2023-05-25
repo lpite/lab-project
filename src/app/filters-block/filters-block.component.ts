@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Observable, async, take } from 'rxjs';
 
 import { Store, select } from '@ngrx/store';
@@ -39,5 +39,19 @@ export class FiltersBlockComponent implements OnInit {
   }
   toggleSortingPopup() {
     this.isOpenSortingPopup = !this.isOpenSortingPopup;
+  }
+  closeSortingPopup() {
+    this.isOpenSortingPopup = false;
+  }
+  @HostListener('window:click', ['$event'])
+  onClick(event: any) {
+    const path = event.path || (event.composedPath && event.composedPath());
+    const isPopup = Boolean(path.find((el: any) => el?.className !== 'sort'));
+    const isPopupLabel = event?.target?.parentElement?.className === 'sort__label';
+
+    if (this.isOpenSortingPopup && isPopup && !isPopupLabel) {
+      this.closeSortingPopup();
+    }
+  
   }
 }

@@ -4,4 +4,5 @@ export interface Pizza {
   price: number;
   imageUrl: string;
   inFuture?: boolean;
+  categoryId: number;
 }
