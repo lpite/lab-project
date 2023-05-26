@@ -12,8 +12,8 @@ import { categoryIdSelector, sortByIdSelector } from './store/filter.selectors';
 })
 export class AppComponent implements OnInit {
   pizzas!: Pizza[];
-  categoryId!: number;
-  sortById!: number;
+  categoryId: number = 0;
+  sortById: number = 0;
   constructor(
     private pizzaService: PizzaService,
     private store: Store<AppStateInterface>

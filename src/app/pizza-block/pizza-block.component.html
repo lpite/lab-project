@@ -1,13 +1,14 @@
 <article class="pizza-block">
+  <span class="pizza-block__ribbon" *ngIf="pizza.inFuture">Незабаром</span>
   <img
     class="pizza-block__image"
-    src="/assets/images/{{pizza.imageUrl}}"
+    src="/assets/images/{{ pizza.imageUrl }}"
     alt="Pizza"
   />
   <h4 class="pizza-block__title">{{ pizza.name }}</h4>
   <div class="pizza-block__bottom">
     <div class="pizza-block__price">від {{ pizza.price }} ₴</div>
-    <div class="button button--outline button--add">
+    <button class="button button--outline button--add" *ngIf="!pizza.inFuture">
       <svg
         width="12"
         height="12"
@@ -22,6 +23,6 @@
       </svg>
       <span>Додати</span>
       <i>2</i>
-    </div>
+    </button>
   </div>
 </article>
