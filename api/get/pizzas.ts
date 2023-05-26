@@ -1,111 +1,57 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
-export default function (request: VercelRequest, response: VercelResponse) {
-  let pizzas = [
-    {
-      id: 0,
-      name: 'Італійська',
-      imageUrl: 'italic.png',
-      price: 1,
-      categoryId: 1,
-    },
-    {
-      id: 1,
-      name: 'Пепероні',
-      imageUrl: 'peperoni.jpg',
-      price: 1,
-      categoryId: 1,
-    },
-    {
-      id: 2,
-      name: "М'ясна",
-      imageUrl: 'meat.png',
-      price: 1,
-      categoryId: 1,
-    },
-    {
-      id: 3,
-      name: 'Маргарита',
-      imageUrl: 'margarita.jpg',
-      price: 1,
-      categoryId: 1,
-    },
-    {
-      id: 4,
-      name: 'Чотири сири',
-      imageUrl: '4 cheese.jpg',
-      price: 1,
-      categoryId: 2,
-    },
-    {
-      id: 5,
-      name: 'Домашня',
-      imageUrl: 'homemade.png',
-      price: 11,
-      inFuture: true,
-      categoryId: 1,
-    },
-    {
-      id: 6,
-      name: 'Овочі та гриби',
-      imageUrl: 'vegetablesAndMushrooms.png',
-      price: 15,
-      inFuture: true,
-      categoryId: 2,
-    },
-    {
-      id: 7,
-      name: 'Подвійне курча',
-      imageUrl: 'doublechicken.png',
-      price: 13,
-      inFuture: true,
-      categoryId: 1,
-    },
-    {
-      id: 8,
-      name: 'Діабло',
-      imageUrl: 'diablo.png',
-      price: 1123,
-      inFuture: true,
-      categoryId: 4,
-    },
-    {
-      id: 8,
-      name: 'Курча барбекю',
-      imageUrl: 'chickenbbq.png',
-      price: 112,
-      inFuture: true,
-      categoryId: 3,
-    },
-  ];
+import {
+  Kysely,
+  PostgresDialect,
+  Generated,
+  ColumnType,
+  Selectable,
+  Insertable,
+  Updateable,
+} from 'kysely';
+import pg from 'pg';
 
-  console.log(request.query);
-  //@ts-ignore
-  switch (request.query.sortById) {
-    case '1':
-      pizzas = pizzas.sort((a, b) => {
-        if (a.price > b.price) {
-          return -1;
-        }
-        if (a.price < b.price) {
-          return 1;
-        }
-        return 0;
-      });
-      break;
-    case '2':
-      pizzas = pizzas.sort((a, b) => {
-        return a.name.localeCompare(b.name);
-      });
-      break;
+interface PizzaTable {
+  id: Generated<number>;
+  name: string;
+  price: number;
+  imageUrl: string;
+  inFuture: boolean;
+  categoryId: number;
+}
+
+interface Database {
+  pizza: PizzaTable;
+}
+
+export default async function (
+  request: VercelRequest,
+  response: VercelResponse
+) {
+  const db = new Kysely<Database>({
+    dialect: new PostgresDialect({
+      pool: new pg.Pool({
+        host: process.env?.['DB_HOST_URL'],
+        database: process.env?.['DB_NAME'],
+        port: parseInt(process.env?.['DB_PORT'] || ''),
+        user: process.env?.['DB_USER'],
+        password: process.env?.['DB_PASSWORD'],
+      }),
+    }),
+  });
+  const { sortById, categoryId } = request.query;
+  const orderBy: Array<'categoryId' | 'price' | 'name'> = [
+    'categoryId',
+    'price',
+    'name',
+  ];
+  const pizzas = db
+    .selectFrom('pizza')
+    .selectAll()
+    .where('categoryId', '=', parseInt(categoryId[0]))
+    .orderBy(orderBy[parseInt(sortById[0])] || 'categoryId');
+  if (categoryId === '0') {
+    return response.send(await pizzas.clearWhere().execute());
   }
-  //@ts-ignore
-  if (request.query.categoryId !== '0') {
-    response.send(
-      //@ts-ignore
-      pizzas.filter((el) => el.categoryId === Number(request.query.categoryId))
-    );
-  } else {
-    response.send(pizzas);
-  }
+ return response.send(await pizzas.execute());
 }
