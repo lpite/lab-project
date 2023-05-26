@@ -8,6 +8,7 @@
     url("./assets/fonts/ProximaNova-Black.ttf") format("truetype");
   font-weight: 900;
   font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: "Proxima Nova";
@@ -19,6 +20,7 @@
     url("./assets/fonts/ProximaNova-Bold.ttf") format("truetype");
   font-weight: bold;
   font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: "Proxima Nova";
@@ -31,6 +33,7 @@
     url("./assets/fonts/ProximaNova-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: "Proxima Nova";
@@ -43,6 +46,7 @@
     url("./assets/fonts/ProximaNova-Extrabld.ttf") format("truetype");
   font-weight: 800;
   font-style: normal;
+  font-display: swap;
 }
 * {
   padding: 0;
