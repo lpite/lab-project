@@ -12,9 +12,12 @@ import { PizzaBlockComponent } from './pizza-block/pizza-block.component';
 import { FiltersBlockComponent } from './filters-block/filters-block.component';
 
 import { filterReducer } from './store/filter.reducer';
+import { CartPageComponent } from './cart-page/cart-page.component';
+import { MainPageComponent } from './main-page/main-page.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
-  declarations: [AppComponent, PizzaBlockComponent, FiltersBlockComponent],
+  declarations: [AppComponent, PizzaBlockComponent, FiltersBlockComponent, CartPageComponent, MainPageComponent, HeaderComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
