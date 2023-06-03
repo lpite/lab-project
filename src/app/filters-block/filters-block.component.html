@@ -3,7 +3,7 @@
     <ul>
       <li
         *ngFor="let category of categories; let i = index"
-        [ngClass]="{ active: i == categoryId }"
+        [ngClass]="{ active: i == (categoryId$ | async) }"
         (click)="setCategoryId(i)"
       >
         {{ category }}
@@ -28,13 +28,15 @@
         />
       </svg>
       <b>Сортувати по:</b>
-      <span (click)="toggleSortingPopup()">{{ sortBy[sortById] }}</span>
+      <span (click)="toggleSortingPopup()">{{
+        sortBy[(sortById$ | async)!]
+      }}</span>
     </div>
     <div class="sort__popup" *ngIf="isOpenSortingPopup">
       <ul>
         <li
           *ngFor="let text of sortBy; let i = index"
-          [ngClass]="{ active: i === sortById }"
+          [ngClass]="{ active: i === (sortById$ | async) }"
           (click)="setSortById(i)"
         >
           {{ text }}

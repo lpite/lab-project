@@ -15,20 +15,17 @@ import { AppStateInterface } from '../types/appState.interface';
   styleUrls: ['./filters-block.component.scss'],
 })
 export class FiltersBlockComponent implements OnInit {
-  categoryId!: number;
-  sortById!: number;
+  categoryId$!: Observable<number>;
+  sortById$!: Observable<number>;
   isOpenSortingPopup = false;
   categories = ['Всі', "М'ясні", 'Вегетарианські', 'Гриль', 'Гострі'];
   sortBy = ['популярності', 'ціні', 'алфавіту'];
 
   constructor(private store: Store<AppStateInterface>) {}
   ngOnInit(): void {
-    this.store.select(categoryIdSelector).subscribe((id) => {
-      this.categoryId = id;
-    });
-    this.store.select(sortByIdSelector).subscribe((id) => {
-      this.sortById = id;
-    });
+    this.categoryId$ = this.store.select(categoryIdSelector);
+
+    this.sortById$ = this.store.select(sortByIdSelector);
   }
 
   setCategoryId(categoryId: number) {
@@ -47,11 +44,11 @@ export class FiltersBlockComponent implements OnInit {
   onClick(event: any) {
     const path = event.path || (event.composedPath && event.composedPath());
     const isPopup = Boolean(path.find((el: any) => el?.className !== 'sort'));
-    const isPopupLabel = event?.target?.parentElement?.className === 'sort__label';
+    const isPopupLabel =
+      event?.target?.parentElement?.className === 'sort__label';
 
     if (this.isOpenSortingPopup && isPopup && !isPopupLabel) {
       this.closeSortingPopup();
     }
-  
   }
 }
