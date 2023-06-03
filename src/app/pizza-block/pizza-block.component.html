@@ -9,7 +9,7 @@
   />
   <h4 class="pizza-block__title">{{ pizza.name }}</h4>
   <div class="pizza-block__bottom">
-    <div class="pizza-block__price">від {{ pizza.price }} ₴</div>
+    <div class="pizza-block__price">{{ pizza.price }} ₴</div>
     <button
       class="button button--outline button--add"
       *ngIf="!pizza.inFuture"
