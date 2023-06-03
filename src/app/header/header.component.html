@@ -13,8 +13,8 @@
       </div>
     </div>
     <div class="header__cart">
-      <a href="/cart" class="button button--cart">
-        <span>520 ₴</span>
+      <a routerLink="/cart" class="button button--cart" >
+        <span>{{ totalPrice }} ₴</span>
         <div class="button__delimiter"></div>
         <svg
           width="18"
@@ -45,7 +45,7 @@
             stroke-linejoin="round"
           />
         </svg>
-        <span>3</span>
+        <span>{{ totalCount }}</span>
       </a>
     </div>
   </div>

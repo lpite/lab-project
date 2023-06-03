@@ -15,14 +15,24 @@ import { filterReducer } from './store/filter.reducer';
 import { CartPageComponent } from './cart-page/cart-page.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { HeaderComponent } from './header/header.component';
+import { cartReducer } from './store/cart/cart.reducer';
+import { PizzaCartBlockComponent } from './pizza-cart-block/pizza-cart-block.component';
 
 @NgModule({
-  declarations: [AppComponent, PizzaBlockComponent, FiltersBlockComponent, CartPageComponent, MainPageComponent, HeaderComponent],
+  declarations: [
+    AppComponent,
+    PizzaBlockComponent,
+    FiltersBlockComponent,
+    CartPageComponent,
+    MainPageComponent,
+    HeaderComponent,
+    PizzaCartBlockComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({ filters: filterReducer }),
+    StoreModule.forRoot({ filters: filterReducer, cart: cartReducer }),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       logOnly: !isDevMode(), // Restrict extension to log-only mode
