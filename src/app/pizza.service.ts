@@ -21,7 +21,7 @@ export class PizzaService {
   }): Observable<Pizza[]> {
     return this.http
       .get<Pizza[]>(
-        `/api/get/pizzas/?categoryId=${categoryId}&sortById=${sortById}`
+        `/api/pizza/?categoryId=${categoryId}&sortById=${sortById}`
       )
       .pipe();
   }
