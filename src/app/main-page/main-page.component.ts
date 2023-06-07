@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { PizzaService } from '../pizza.service';
-import { categoryIdSelector, sortByIdSelector } from '../store/filter.selectors';
+import {
+  categoryIdSelector,
+  sortByIdSelector,
+} from '../store/filter.selectors';
 import { Pizza } from '../types/Pizza';
 import { AppStateInterface } from '../types/appState.interface';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-main-page',
@@ -11,7 +15,7 @@ import { AppStateInterface } from '../types/appState.interface';
   styleUrls: ['./main-page.component.scss'],
 })
 export class MainPageComponent {
-  pizzas!: Pizza[];
+  pizzas!: Observable<Pizza[]>;
   categoryId: number = 0;
   sortById: number = 0;
   constructor(
@@ -30,8 +34,9 @@ export class MainPageComponent {
     });
   }
   getPizzas() {
-    this.pizzaService
-      .getPizzas({ categoryId: this.categoryId, sortById: this.sortById })
-      .subscribe((pizzas) => (this.pizzas = pizzas));
+    this.pizzas = this.pizzaService.getPizzas({
+      categoryId: this.categoryId,
+      sortById: this.sortById,
+    });
   }
 }

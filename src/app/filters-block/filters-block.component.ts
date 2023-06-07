@@ -24,7 +24,6 @@ export class FiltersBlockComponent implements OnInit {
   constructor(private store: Store<AppStateInterface>) {}
   ngOnInit(): void {
     this.categoryId$ = this.store.select(categoryIdSelector);
-
     this.sortById$ = this.store.select(sortByIdSelector);
   }
 

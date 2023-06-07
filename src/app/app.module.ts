@@ -17,6 +17,11 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { HeaderComponent } from './header/header.component';
 import { cartReducer } from './store/cart/cart.reducer';
 import { PizzaCartBlockComponent } from './pizza-cart-block/pizza-cart-block.component';
+import { ContactFormComponent } from './contact-form/contact-form.component';
+import { FooterComponent } from './footer/footer.component';
+import { AboutPageComponent } from './about-page/about-page.component';
+import { ContactPageComponent } from './contact-page/contact-page.component';
+import { OurTeamPageComponent } from './our-team-page/our-team-page.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +32,11 @@ import { PizzaCartBlockComponent } from './pizza-cart-block/pizza-cart-block.com
     MainPageComponent,
     HeaderComponent,
     PizzaCartBlockComponent,
+    ContactFormComponent,
+    FooterComponent,
+    AboutPageComponent,
+    ContactPageComponent,
+    OurTeamPageComponent,
   ],
   imports: [
     BrowserModule,
