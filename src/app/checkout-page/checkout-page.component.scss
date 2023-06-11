@@ -1,0 +1,139 @@
+.container {
+  display: flex;
+}
+
+.checkout_left {
+  width: 50%;
+}
+.checkout_login_form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 20px 0;
+  padding: 15px;
+
+  .form_row {
+    display: inline-flex;
+    align-items: center;
+  }
+  .form_col {
+    width: 180px;
+    display: block;
+    font-size: 18px;
+    font-weight: 500;
+  }
+}
+
+.checkout_promo_form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  margin: 35px 0;
+  padding: 15px;
+
+  .form_input {
+    margin-right: 10px;
+  }
+  .button {
+    height: 39px;
+    border-radius: 10px;
+  }
+  .form_row {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.checkout_payment_form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 35px 0;
+  padding: 32px;
+  border-radius: 10px;
+  background-color: rgb(243, 243, 247);
+
+  .payment_method {
+    display: flex;
+    gap: 10px;
+    font-size: 21px;
+  }
+  .card_form {
+    display: flex;
+    flex-direction: column;
+    height: 90px;
+    width: 300px;
+    gap: 10px;
+    overflow: hidden;
+    transition: all 0.2s ease-in-out;
+  }
+  .card_form--hidden {
+    height: 0;
+    transition: all 0.2s ease-in-out;
+  }
+  .card_input {
+    width: 100%;
+    display: inline-flex;
+    flex-shrink: 1;
+    height: 40px;
+    border: 1px solid #d8d8d8;
+    border-radius: 8px;
+    font-size: 16px;
+    padding: 0 16px;
+  }
+  .form_row {
+    display: flex;
+    gap: 10px;
+  }
+}
+
+.checkout_buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  width: 50%;
+}
+
+.checkout_order_details {
+  height: min-content;
+  width: 390px;
+  float: right;
+  margin-left: 220px;
+  padding: 32px;
+  box-shadow: rgba(6, 5, 50, 0.1) 0px 6px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .title {
+    font-weight: 600;
+  }
+
+  .order_item {
+    display: flex;
+    padding: 15px 0;
+    .name {
+      flex-grow: 1;
+      font-weight: 600;
+      font-size: 16px;
+    }
+    .price{
+      font-weight: 600;
+    }
+  }
+  .order_total {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.form_input {
+  height: 40px;
+  width: 374px;
+  border-radius: 10px;
+  border: 1px solid rgba(92, 99, 112, 0.32);
+  padding: 0px 15px;
+  font-size: 16px;
+  font-weight: 500;
+}

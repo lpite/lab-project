@@ -1,6 +1,7 @@
 import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +23,7 @@ import { FooterComponent } from './footer/footer.component';
 import { AboutPageComponent } from './about-page/about-page.component';
 import { ContactPageComponent } from './contact-page/contact-page.component';
 import { OurTeamPageComponent } from './our-team-page/our-team-page.component';
+import { CheckoutPageComponent } from './checkout-page/checkout-page.component';
 
 @NgModule({
   declarations: [
@@ -37,11 +39,13 @@ import { OurTeamPageComponent } from './our-team-page/our-team-page.component';
     AboutPageComponent,
     ContactPageComponent,
     OurTeamPageComponent,
+    CheckoutPageComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule,
     StoreModule.forRoot({ filters: filterReducer, cart: cartReducer }),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states

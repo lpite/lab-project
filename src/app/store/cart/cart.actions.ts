@@ -11,10 +11,10 @@ export const clearCart = createAction('[Cart Store] Clear Cart');
 
 export const removePizza = createAction(
   '[Cart Store] Remove Pizza',
-  props<{ pizzaId: number }>()
+  props<{ pizzaId: string }>()
 );
 
 export const removeOnePizza = createAction(
   '[Cart Store] Remove One Pizza',
-  props<{ pizzaId: number }>()
+  props<{ pizzaId: string }>()
 );

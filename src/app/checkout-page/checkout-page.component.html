@@ -1,0 +1,139 @@
+<div class="content">
+  <div class="container">
+    <form class="checkout_left" [formGroup]="checkOutForm">
+      <div class="checkout_login_form">
+        <h2>Замовлення</h2>
+        <label class="form_row">
+          <span class="form_col"> Ім'я </span>
+          <input class="form_input" type="text" formControlName="name" />
+        </label>
+        <label class="form_row">
+          <span class="form_col">Номер телефону</span>
+          <input class="form_input" type="tel" formControlName="phoneNumber" />
+        </label>
+        <span
+          *ngIf="validateInput('phoneNumber')"
+          class="contact_form__error_text"
+        >
+          Некоректне ім'я
+        </span>
+      </div>
+      <div class="checkout_promo_form">
+        <h2>Промокод</h2>
+        <div class="form_row">
+          <input type="text" class="form_input" formControlName="promoCode" />
+          <button
+            class="button"
+            (click)="checkPromoCode()"
+            [disabled]="checkOutForm.controls.promoCode.disabled"
+          >
+            Використати
+          </button>
+        </div>
+      </div>
+      <div class="checkout_payment_form">
+        <h2>Спосіб Оплати</h2>
+        <label class="payment_method">
+          <input
+            type="radio"
+            name="paymentMethod"
+            value="credit"
+            formControlName="paymentMethod"
+            [checked]="checkOutForm.value.paymentMethod === 'credit'"
+          />
+          <span>Картою на сайті</span>
+        </label>
+        <div
+          class="card_form"
+          [ngClass]="{
+            'card_form--hidden': checkOutForm.value.paymentMethod === 'cash'
+          }"
+        >
+          <input
+            type="text"
+            maxlength="23"
+            placeholder="Номер карти"
+            class="card_input"
+          />
+          <div class="form_row">
+            <input
+              type="text"
+              name=""
+              max="5"
+              placeholder="Строк дії"
+              class="card_input"
+            />
+            <input
+              type="text"
+              placeholder="CVC"
+              maxlength="3"
+              class="card_input"
+            />
+          </div>
+        </div>
+        <label class="payment_method">
+          <input
+            type="radio"
+            name="paymentMethod"
+            [checked]="checkOutForm.value.paymentMethod === 'cash'"
+            value="cash"
+            formControlName="paymentMethod"
+          />
+          <span>Готівкою</span>
+        </label>
+      </div>
+    </form>
+    <div class="checkout_order_details">
+      <h3 class="title">Склад замовлення</h3>
+      <div class="order_item" *ngFor="let pizza of pizzas$ | async">
+        <span class="name"> {{ pizza.name }} </span>
+        <span class="price">
+          <span *ngIf="pizza.quantity > 1">{{ pizza.quantity }} × </span>
+          {{ pizza.price }} ₴</span
+        >
+      </div>
+      <hr />
+      <div class="order_total">
+        <span>Сума замовлення</span>
+        <span
+          >{{
+            ((cartTotalPrice$ | async) || 0) -
+              (((cartTotalPrice$ | async) || 0) * discountPercentage) / 100
+          }}
+          ₴</span
+        >
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="checkout_buttons">
+      <a class="button button--gray" routerLink="/cart/">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          style="transform: rotate(180deg)"
+        >
+          <path
+            d="M10 18l6-6-6-6"
+            stroke="#000"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+        </svg>
+        Назад у кошик
+      </a>
+      <button class="button" style="font-size: 16px" (click)="createOrder()">
+        Оформити замовлення на суму
+        {{
+          ((cartTotalPrice$ | async) || 0) -
+            (((cartTotalPrice$ | async) || 0) * discountPercentage) / 100
+        }}
+        ₴
+      </button>
+    </div>
+  </div>
+</div>

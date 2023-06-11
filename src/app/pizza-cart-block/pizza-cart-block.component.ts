@@ -21,7 +21,7 @@ export class PizzaCartBlockComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  removePizza(pizzaId: number): void {
+  removePizza(pizzaId: string): void {
     this.store.dispatch(removePizza({ pizzaId }));
   }
 

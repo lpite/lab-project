@@ -1,6 +1,49 @@
-.contact_form{
+.contact_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+
+  .contact_form__inputs {
+    display: inline-flex;
+  }
+
+  .contact_form__label {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
+    width: 100%;
+    max-width: 400px;
+    min-height: 110px;
+    span {
+      margin: 4px 14px;
+    }
+  }
+
+  .contact_form__input {
+    width: 260px;
+    height: 19px;
+    padding: 24px 5px;
+    font-size: 16px;
+    margin: 0 5px;
+    border: 2px solid #f24701;
+    border-radius: 10px;
+  }
+  .contact_form__input--invalid::before {
+    content: "1231231231";
+    background-color: #f24701;
+  }
+
+  .contact_form__textarea {
+    border: 2px solid #f24701;
+    border-radius: 10px;
+    padding: 6px;
+    height: 160px;
+    width: 100%;
+    resize: none;
+  }
+
+  .contact_form__error_text {
+    color: red;
+  }
 }

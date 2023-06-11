@@ -158,6 +158,15 @@ a {
   -webkit-transform: translateY(1px);
   transform: translateY(1px);
 }
+
+.button:disabled {
+  background-color: gray;
+  cursor: default;
+}
+.button:disabled:active {
+  transform: none;
+}
+
 .button--circle {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -256,6 +265,20 @@ a {
   font-weight: 600;
   font-size: 16px;
 }
+
+.button--gray {
+  background-color: rgb(243, 243, 247);
+  color: rgb(92, 99, 112);
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.button--gray:hover {
+  background-color: rgb(243, 243, 247);
+  color: black;
+}
+
 .categories ul {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -750,4 +773,12 @@ body {
   margin: 0 auto;
   font-weight: 600;
   font-size: 18px;
+}
+
+.text {
+  font-size: 20px;
+  margin: 15px 0;
+}
+.text:last-child {
+  margin-bottom: 50px;
 }

@@ -18,7 +18,7 @@ export const selectPizzas = createSelector(
   (state) => state.pizzas
 );
 
-export const selectPizzaQuantity = (props: { id: number }) =>
+export const selectPizzaQuantity = (props: { id: string }) =>
   createSelector(
     selectFeature,
     (state) => state.pizzas.find((el) => el.id === props.id)?.quantity
