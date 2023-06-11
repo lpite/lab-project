@@ -95,7 +95,7 @@ export default async function (
       .executeTakeFirst();
 
     orderSum = orderSum - (orderSum * (promo?.discount_percent || 0)) / 100;
-  
+
     const order = await db
       .insertInto('order')
       .returning('id')
@@ -125,13 +125,15 @@ export default async function (
         })
         .executeTakeFirstOrThrow();
     }
-
-    await db
+    if ((promo?.uses_left || 0) > 0) {
+      await db
       .updateTable('promo_code')
       .set({
         uses_left: (promo?.uses_left || 0) - 1,
       })
       .executeTakeFirstOrThrow();
+    }
+
     response.send({ success: true });
   } catch (error) {
     console.error(error);
