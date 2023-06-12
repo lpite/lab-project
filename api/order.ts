@@ -128,6 +128,7 @@ export default async function (
 
     await db
       .updateTable('promo_code')
+      .where("id","=",promo.id)
       .set({
         uses_left: (promo?.uses_left || 0) - 1,
       })
