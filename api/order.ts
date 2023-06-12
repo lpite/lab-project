@@ -125,7 +125,8 @@ export default async function (
         })
         .executeTakeFirstOrThrow();
     }
-
+  if(promo?.id){
+  
     await db
       .updateTable('promo_code')
       .where("id","=",promo.id)
@@ -133,6 +134,7 @@ export default async function (
         uses_left: (promo?.uses_left || 0) - 1,
       })
       .executeTakeFirstOrThrow();
+  }
     response.send({ success: true });
   } catch (error) {
     console.error(error);
