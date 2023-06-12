@@ -7,16 +7,15 @@
           <span class="form_col"> Ім'я </span>
           <input class="form_input" type="text" formControlName="name" />
         </label>
+        <span *ngIf="validateInput('name')" class=""> Некоректне ім'я </span>
+
         <label class="form_row">
           <span class="form_col">Номер телефону</span>
           <input class="form_input" type="tel" formControlName="phoneNumber" />
         </label>
-        <span
-          *ngIf="validateInput('phoneNumber')"
-          class="contact_form__error_text"
+        <span *ngIf="validateInput('phoneNumber')" class="">
+          Некоректний номер телефону</span
         >
-          Некоректне ім'я
-        </span>
       </div>
       <div class="checkout_promo_form">
         <h2>Промокод</h2>
@@ -30,6 +29,11 @@
             Використати
           </button>
         </div>
+      </div>
+      <div class="checkout_delivery_form">
+        <h2>Доставка</h2>
+        <span>Самовивіз </span>
+        <b>вул. Шевченка 10, м. Київ</b>
       </div>
       <div class="checkout_payment_form">
         <h2>Спосіб Оплати</h2>
@@ -54,6 +58,7 @@
             maxlength="23"
             placeholder="Номер карти"
             class="card_input"
+            formControlName="cardNumber"
           />
           <div class="form_row">
             <input
@@ -62,12 +67,14 @@
               max="5"
               placeholder="Строк дії"
               class="card_input"
+              formControlName="cardExpDate"
             />
             <input
               type="text"
               placeholder="CVC"
               maxlength="3"
               class="card_input"
+              formControlName="cardCVC"
             />
           </div>
         </div>
@@ -96,17 +103,23 @@
       <div class="order_total" *ngIf="checkOutForm.controls.promoCode.disabled">
         <span>Знижка</span>
         <span>
-          -{{ (((cartTotalPrice$ | async) || 0) * discountPercentage) / 100 }}
+          -{{
+            math.round(
+              (((cartTotalPrice$ | async) || 0) * discountPercentage) / 100
+            )
+          }}
           ₴
         </span>
       </div>
 
       <div class="order_total">
         <span>Сума замовлення</span>
-        <span
-          >{{
-            ((cartTotalPrice$ | async) || 0) -
-              (((cartTotalPrice$ | async) || 0) * discountPercentage) / 100
+        <span>
+          {{
+            math.round(
+              ((cartTotalPrice$ | async) || 0) -
+                (((cartTotalPrice$ | async) || 0) * discountPercentage) / 100
+            )
           }}
           ₴</span
         >
@@ -137,8 +150,10 @@
       <button class="button" style="font-size: 16px" (click)="createOrder()">
         Оформити замовлення на суму
         {{
-          ((cartTotalPrice$ | async) || 0) -
-            (((cartTotalPrice$ | async) || 0) * discountPercentage) / 100
+          math.round(
+            ((cartTotalPrice$ | async) || 0) -
+              (((cartTotalPrice$ | async) || 0) * discountPercentage) / 100
+          )
         }}
         ₴
       </button>

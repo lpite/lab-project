@@ -36,13 +36,10 @@
   <label class="contact_form__label">
     <span>Ваше повідомлення</span>
     <textarea class="contact_form__textarea" formControlName="text"></textarea>
-    <span
-    *ngIf="validateInput('text')"
-    class="contact_form__error_text"
-  >
-    Повідомлення не може бути порожнім
-  </span>  
-</label>
+    <span *ngIf="validateInput('text')" class="contact_form__error_text">
+      Повідомлення не може бути порожнім
+    </span>
+  </label>
   <button class="button button--cart">
     <span>Написати</span>
   </button>

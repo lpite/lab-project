@@ -118,13 +118,24 @@
       font-weight: 600;
       font-size: 16px;
     }
-    .price{
+    .price {
       font-weight: 600;
     }
   }
   .order_total {
     display: flex;
     justify-content: space-between;
+  }
+}
+
+.checkout_delivery_form {
+  background-color: rgb(243, 243, 247);
+  padding: 32px;
+  border-radius: 10px;
+
+
+  h2 {
+    margin: 20px 0;
   }
 }
 
