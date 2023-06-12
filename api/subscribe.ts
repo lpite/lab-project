@@ -65,7 +65,7 @@ switch (request.method) {
         <h2>${el.phoneNumber}</h2>
         <h4>${el.text}</h4>
     </div>
-  `));
+  `).join(""));
       break;
 
   default:
