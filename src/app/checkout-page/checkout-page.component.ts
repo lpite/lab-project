@@ -56,7 +56,7 @@ export class CheckoutPageComponent implements OnInit {
         .subscribe({
           next: ({ valid, percentage }) => {
             if (!valid) {
-              alert('Такого промокоду не інсує!');
+              alert('Такого промокоду не існує!');
             } else {
               this.checkOutForm.controls.promoCode.disable();
               this.discountPercentage = percentage;
