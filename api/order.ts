@@ -5,7 +5,6 @@ import pg from 'pg';
 import zod from 'zod';
 import { PizzaTable } from './pizza';
 import { PromoCodeTable } from './promocode';
-import { Pizza } from 'src/app/types/Pizza';
 
 interface OrderTable {
   id: Generated<number>;
@@ -125,15 +124,17 @@ export default async function (
         })
         .executeTakeFirstOrThrow();
     }
-    if ((promo?.uses_left || 0) > 0) {
-      await db
-      .updateTable('promo_code')
-      .set({
-        uses_left: (promo?.uses_left || 0) - 1,
-      })
-      .executeTakeFirstOrThrow();
+    if (promo?.id) {
+      if ((promo?.uses_left || 0) > 0) {
+        await db
+          .updateTable('promo_code')
+          .where('id', '=', promo.id)
+          .set({
+            uses_left: (promo?.uses_left || 0) - 1,
+          })
+          .executeTakeFirstOrThrow();
+      }
     }
-
     response.send({ success: true });
   } catch (error) {
     console.error(error);
