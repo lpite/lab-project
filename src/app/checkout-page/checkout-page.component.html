@@ -93,6 +93,14 @@
         >
       </div>
       <hr />
+      <div class="order_total" *ngIf="checkOutForm.controls.promoCode.disabled">
+        <span>Знижка</span>
+        <span>
+          -{{ (((cartTotalPrice$ | async) || 0) * discountPercentage) / 100 }}
+          ₴
+        </span>
+      </div>
+
       <div class="order_total">
         <span>Сума замовлення</span>
         <span

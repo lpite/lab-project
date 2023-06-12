@@ -54,6 +54,7 @@ export class CheckoutPageComponent implements OnInit {
             if (!valid) {
               alert('Такого промокоду не інсує!');
             } else {
+              this.checkOutForm.controls.promoCode.disable();
               this.discountPercentage = percentage;
               alert('Промокод успішно використано!');
             }
@@ -68,7 +69,7 @@ export class CheckoutPageComponent implements OnInit {
     const orderObject: any = {
       paymentMethod: this.paymentMethod,
       pizzas: [],
-      promocode: this.checkOutForm.value.promoCode || '',
+      promocode: this.checkOutForm.getRawValue().promoCode || '',
       customer: {
         name: this.checkOutForm.value.name,
         phoneNumber: this.checkOutForm.value.phoneNumber,
