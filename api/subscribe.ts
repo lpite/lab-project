@@ -56,10 +56,16 @@ switch (request.method) {
     }
     break;
     case "GET":
-      const subscriptions =  await db.selectFrom("feedback")
+      const subscriptions: any[] =  await db.selectFrom("feedback")
       .selectAll()
       .execute()
-      return response.send(subscriptions);
+      return response.send(subscriptions.map((el)=>` 
+      <div>
+        <h2>${el.name}</h2>
+        <h2>${el.phoneNumber}</h2>
+        <h4>${el.text}</h4>
+    </div>
+  `));
       break;
 
   default:
@@ -67,5 +73,6 @@ switch (request.method) {
      return  response.status(404);
     }
     break;
-} 
+}
+  
 }
