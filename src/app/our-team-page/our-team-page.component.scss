@@ -26,12 +26,12 @@ article {
     font-size: 26px;
   }
 }
-@media screen and (min-width: 900px) {
+@media screen and (max-width: 900px) {
   article{
      width: 40%;
   }
 }
-@media screen and (min-width: 770px) {
+@media screen and (max-width: 770px) {
   article{
      width: 100%;
   }
