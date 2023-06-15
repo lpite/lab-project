@@ -1,34 +1,9 @@
 import { VercelRequest, VercelResponse } from '@vercel/node';
+import { Database, OrderPizzaTable } from 'db/db';
 
 import { Kysely, PostgresDialect, Generated } from 'kysely';
 import pg from 'pg';
 import zod from 'zod';
-import { PizzaTable } from './pizza';
-import { PromoCodeTable } from './promocode';
-
-interface OrderTable {
-  id: Generated<number>;
-  customer_name: string;
-  customer_phonenumber: string;
-  payment_method: string;
-  sum: number;
-}
-
-interface OrderPizzaTable {
-  id: Generated<number>;
-  pizza_id: number;
-  order_id: number;
-  name: string;
-  price: number;
-  quantity: number;
-}
-
-interface Database {
-  order: OrderTable;
-  order_pizza: OrderPizzaTable;
-  pizza: PizzaTable;
-  promo_code: PromoCodeTable;
-}
 
 const db = new Kysely<Database>({
   dialect: new PostgresDialect({

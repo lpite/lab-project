@@ -3,17 +3,8 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { Kysely, PostgresDialect, Generated } from 'kysely';
 import zod from 'zod';
 import pg from 'pg';
+import { Database } from 'db/db';
 
-interface FeedBackTable {
-  id: Generated<number>;
-  name: string;
-  phoneNumber: string;
-  text: string;
-}
-
-interface Database {
-  feedback: FeedBackTable;
-}
 const db = new Kysely<Database>({
   dialect: new PostgresDialect({
     pool: new pg.Pool({

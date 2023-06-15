@@ -1,20 +1,9 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { Database } from 'db/db';
 
 import { Kysely, PostgresDialect, Generated } from 'kysely';
 import pg from 'pg';
 
-export interface PizzaTable {
-  id: Generated<number>;
-  name: string;
-  price: number;
-  imageUrl: string;
-  inFuture: boolean;
-  categoryId: number;
-}
-
-interface Database {
-  pizza: PizzaTable;
-}
 const db = new Kysely<Database>({
   dialect: new PostgresDialect({
     pool: new pg.Pool({
