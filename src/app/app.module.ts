@@ -24,6 +24,7 @@ import { AboutPageComponent } from './about-page/about-page.component';
 import { ContactPageComponent } from './contact-page/contact-page.component';
 import { OurTeamPageComponent } from './our-team-page/our-team-page.component';
 import { CheckoutPageComponent } from './checkout-page/checkout-page.component';
+import { SelectCityPopupComponent } from './select-city-popup/select-city-popup.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { CheckoutPageComponent } from './checkout-page/checkout-page.component';
     ContactPageComponent,
     OurTeamPageComponent,
     CheckoutPageComponent,
+    SelectCityPopupComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,107 @@
+<div class="select_city_popup">
+  <div class="body">
+    <div class="body_top">
+      <img src="/assets/icons/pizza-logo.svg" alt="" width="49" />
+      <span>{{ numberOfPizzeriasText }} по Україні</span>
+    </div>
+    <div class="location_search">
+      <div class="location_search__input">
+        <input
+          type="text"
+          class="input"
+          placeholder="Пошук..."
+          (input)="findCities($event)"
+        />
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          class="search_icon"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M18.293 19.707l-4-4 1.414-1.414 4 4a1 1 0 01-1.414 1.414z"
+          ></path>
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M10.5 16a5.5 5.5 0 100-11 5.5 5.5 0 000 11zm0 2a7.5 7.5 0 100-15 7.5 7.5 0 000 15z"
+          ></path>
+        </svg>
+      </div>
+      <div class="popular_cities_container">
+        <button class="popular_city_button" *ngFor="let bigCity of bigCities">
+          {{ bigCity.name }}
+        </button>
+      </div>
+    </div>
+    <div class="cities_table">
+      <div class="table_col" *ngIf="checkIfNeedToDisplayColumn(ALPHABET1)">
+        <div class="table_group" *ngFor="let letter of ALPHABET1">
+          <span
+            class="table_group__letter"
+            *ngIf="filterCities(letter).length"
+            >{{ letter }}</span
+          >
+          <button
+            class="city_button"
+            [ngClass]="{ 'city_button--gray': city.pizzerias_quantity === '0' }"
+            *ngFor="let city of filterCities(letter)"
+          >
+            <span class="city_label">{{ city.name }}</span>
+            <span
+              *ngIf="city.pizzerias_quantity === '0'"
+              class="in_future_label"
+              >Незабаром</span
+            >
+          </button>
+        </div>
+      </div>
+      <div class="table_col" *ngIf="checkIfNeedToDisplayColumn(ALPHABET2)">
+        <div class="table_group" *ngFor="let letter of ALPHABET2">
+          <span
+            class="table_group__letter"
+            *ngIf="filterCities(letter).length"
+            >{{ letter }}</span
+          >
+          <button
+            class="city_button"
+            [ngClass]="{ 'city_button--gray': city.pizzerias_quantity === '0' }"
+            *ngFor="let city of filterCities(letter)"
+          >
+            <span class="city_label">{{ city.name }}</span>
+            <span
+              *ngIf="city.pizzerias_quantity === '0'"
+              class="in_future_label"
+              >Незабаром</span
+            >
+          </button>
+        </div>
+      </div>
+      <div class="table_col" *ngIf="checkIfNeedToDisplayColumn(ALPHABET3)">
+        <div class="table_group" *ngFor="let letter of ALPHABET3">
+          <span
+            class="table_group__letter"
+            *ngIf="filterCities(letter).length"
+            >{{ letter }}</span
+          >
+          <button
+            class="city_button"
+            [ngClass]="{ 'city_button--gray': city.pizzerias_quantity === '0' }"
+            *ngFor="let city of filterCities(letter)"
+          >
+            <span class="city_label">{{ city.name }}</span>
+            <span
+              *ngIf="city.pizzerias_quantity === '0'"
+              class="in_future_label"
+              >Незабаром</span
+            >
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

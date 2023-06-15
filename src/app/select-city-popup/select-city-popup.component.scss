@@ -1,0 +1,106 @@
+.select_city_popup {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.19);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .body {
+    height: 600px;
+    width: 900px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+  }
+  .body_top {
+    display: flex;
+    align-items: center;
+    font-size: 36px;
+    font-weight: 600;
+    img {
+      margin-right: 20px;
+    }
+  }
+  .location_search {
+    height: 126px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 10px 30px 30px;
+    flex-direction: column;
+    margin-top: 30px;
+    .location_search__input {
+      position: relative;
+    }
+    .input {
+      padding-left: 40px;
+      width: 350px;
+    }
+    .search_icon {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      fill: gray;
+    }
+  }
+
+  .popular_cities_container {
+    margin: 20px 2px 0;
+    display: flex;
+    justify-content: flex-start;
+
+    .popular_city_button {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      margin-right: 15px;
+      font-size: 22px;
+    }
+  }
+  .cities_table {
+    overflow-y: scroll;
+    flex: 1;
+    display: flex;
+  }
+  .table_col {
+    height: 100%;
+    width: 100%;
+  }
+  .table_group {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    .city_button {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 5px 28px;
+      text-align: start;
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .city_button--gray {
+      .city_label {
+        color: gray;
+      }
+    }
+    .in_future_label{
+      color: gray;
+      font-size: 12px;
+      display: block;
+    }
+  }
+  .table_group__letter {
+    position: absolute;
+    color: #fe5f1e;
+    padding: 5px 0;
+  }
+
+}
