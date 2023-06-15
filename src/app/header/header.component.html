@@ -1,19 +1,25 @@
 <header class="header">
   <div class="container">
-    <a class="header__logo" routerLink="/">
-      <img
-        height="49"
-        width="38"
-        src="/assets/icons/pizza-logo.svg"
-        alt="Pizza logo"
-      />
-      <div>
-        <h1>Like Pizza</h1>
-        <p>Найсмачніша піца у світі</p>
-      </div>
-    </a>
+    <div class="header__left">
+      <a class="header__logo" routerLink="/">
+        <img
+          height="49"
+          width="38"
+          src="/assets/icons/pizza-logo.svg"
+          alt="Pizza logo"
+        />
+        <div>
+          <h1>Like Pizza</h1>
+          <p>Найсмачніша піца у світі</p>
+        </div>
+      </a>
+      <span class="header__order_to">
+        <span>Доставка у </span>
+        <button>Місто</button>
+      </span>
+    </div>
     <div class="header__cart">
-      <a routerLink="/cart" class="button button--cart" >
+      <a routerLink="/cart" class="button button--cart">
         <span>{{ totalPrice }} ₴</span>
         <div class="button__delimiter"></div>
         <svg
