@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
-import pizzeriasNumber from 'api/pizzerias-number';
+import { Component, Inject, Input, OnInit } from '@angular/core';
+import { PopUpService } from './select-city-popup.service';
+import { Observable } from 'rxjs';
+import { DOCUMENT } from '@angular/common';
 
-interface City {
-  name: string;
-  pizzerias_quantity: string;
-}
+import zod from 'zod';
+import { City, cityValidator } from '../types/City';
 
 @Component({
   selector: 'app-select-city-popup',
@@ -13,12 +13,12 @@ interface City {
   styleUrls: ['./select-city-popup.component.scss'],
 })
 export class SelectCityPopupComponent implements OnInit {
-  @Input('visible') visible: boolean = false;
-
   ALPHABET1 = ['А', 'Б', 'В', 'Г', 'Ґ', 'Д', 'Е', 'Є', 'Ж', 'З', 'И'];
   ALPHABET2 = ['І', 'Ї', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С'];
   ALPHABET3 = ['Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ю', 'Я'];
   PIZZERIAS_TEXT_ENDINGS = ['й', 'я', 'ї', 'ї', 'ї', 'й', 'й', 'й', 'й', 'й'];
+
+  display$!: Observable<boolean>;
 
   bigCities: City[] = [];
   cities: City[] = [];
@@ -26,15 +26,37 @@ export class SelectCityPopupComponent implements OnInit {
 
   numberOfPizzeriasText = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private popupService: PopUpService,
+    @Inject(DOCUMENT) private document: Document
+  ) {}
+
   ngOnInit(): void {
+    this.display$ = this.popupService.watch();
+    this.popupService.watch().subscribe((display) => {
+      if (display) {
+        const scrollBarWidth =
+          window.innerWidth - this.document.body.offsetWidth;
+        this.document.body.classList.add('body--hidden-scroll');
+        this.document.body.style.marginRight = scrollBarWidth.toString() + 'px';
+      } else {
+        this.document.body.classList.remove('body--hidden-scroll');
+        this.document.body.style.marginRight = '0';
+      }
+
+      const savedCity = cityValidator.parse(
+        JSON.parse(localStorage.getItem('city') || '')
+      );
+      this.popupService.selectCity(savedCity || '');
+    });
     this.http
       .get<{
         big_cities: City[];
         cities: City[];
       }>('/api/city/')
       .subscribe({
-        next: ({ cities, big_cities }) => {
+        next: ({ big_cities, cities }) => {
           this.bigCities = big_cities;
           this.cities = cities;
         },
@@ -43,9 +65,14 @@ export class SelectCityPopupComponent implements OnInit {
       .get<{ pizzeriasNumber: number }>('/api/pizzerias-number/')
       .subscribe({
         next: ({ pizzeriasNumber }) => {
-          this.numberOfPizzeriasText = this.generatePizzeriasText(pizzeriasNumber);
+          this.numberOfPizzeriasText =
+            this.generatePizzeriasText(pizzeriasNumber);
         },
       });
+  }
+
+  closePopUp() {
+    this.popupService.close();
   }
 
   filterCities(letter: string): City[] {
@@ -95,6 +122,11 @@ export class SelectCityPopupComponent implements OnInit {
         ]
       }`;
     }
-    return '';
+  }
+
+  selectCity(city: City) {
+    this.popupService.selectCity(city);
+    localStorage.setItem('city', JSON.stringify(city));
+    this.closePopUp();
   }
 }

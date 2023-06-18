@@ -9,6 +9,22 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  .close_button {
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    top: 10px;
+    right: -40px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    svg {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
   .body {
     height: 600px;
     width: 900px;
@@ -17,6 +33,7 @@
     padding: 40px;
     display: flex;
     flex-direction: column;
+    position: relative;
   }
   .body_top {
     display: flex;
@@ -91,7 +108,7 @@
         color: gray;
       }
     }
-    .in_future_label{
+    .in_future_label {
       color: gray;
       font-size: 12px;
       display: block;
@@ -102,5 +119,4 @@
     color: #fe5f1e;
     padding: 5px 0;
   }
-
 }
