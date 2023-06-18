@@ -16,6 +16,11 @@
         <span *ngIf="validateInput('phoneNumber')" class="">
           Некоректний номер телефону</span
         >
+        <label class="form_row">
+          <span class="form_col">Адреса піцерії</span>
+          <input class="form_input" type="tel" value="123123" />
+          <button class="change_address_button">Змінити</button>
+        </label>
       </div>
       <div class="checkout_promo_form">
         <h2>Промокод</h2>
@@ -29,11 +34,6 @@
             Використати
           </button>
         </div>
-      </div>
-      <div class="checkout_delivery_form">
-        <h2>Доставка</h2>
-        <span>Самовивіз </span>
-        <b>вул. Шевченка 10, м. Київ</b>
       </div>
       <div class="checkout_payment_form">
         <h2>Спосіб Оплати</h2>

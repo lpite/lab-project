@@ -15,12 +15,24 @@
   .form_row {
     display: inline-flex;
     align-items: center;
+    position: relative;
   }
   .form_col {
     width: 180px;
     display: block;
     font-size: 18px;
     font-weight: 500;
+  }
+
+  .change_address_button {
+    position: absolute;
+    right: 60px;
+
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #f24701;
+    font-weight: 600;
   }
 }
 
@@ -125,17 +137,6 @@
   .order_total {
     display: flex;
     justify-content: space-between;
-  }
-}
-
-.checkout_delivery_form {
-  background-color: rgb(243, 243, 247);
-  padding: 32px;
-  border-radius: 10px;
-
-
-  h2 {
-    margin: 20px 0;
   }
 }
 
