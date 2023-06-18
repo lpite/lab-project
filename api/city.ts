@@ -19,22 +19,22 @@ export default async function (_: VercelRequest, response: VercelResponse) {
     const cities = await db
       .selectFrom('city')
       .leftJoin('pizzeria', 'pizzeria.city_id', 'city.id')
-      .select(['name'])
+      .select(['city.name', 'city.id'])
       .select(({ fn }) =>
         fn.count<number>('pizzeria.id').as('pizzerias_quantity')
       )
       .where('hidden', '!=', true)
       .orderBy('pizzerias_quantity')
-      .groupBy('city.name')
+      .groupBy(['city.name', 'city.id'])
       .execute();
     const bigCities = await db
       .selectFrom('city')
       .leftJoin('pizzeria', 'pizzeria.city_id', 'city.id')
-      .select('city.name')
+      .select(['city.name', 'city.id'])
       .select(({ fn }) => fn.count('pizzeria.city_id').as('pizzerias_quantity'))
       .where('hidden', '!=', true)
       .orderBy('pizzerias_quantity', 'desc')
-      .groupBy('city.name')
+      .groupBy(['city.name', 'city.id'])
       .limit(2)
       .execute();
     response.send({
