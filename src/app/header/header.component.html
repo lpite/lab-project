@@ -14,13 +14,15 @@
         </div>
       </a>
       <span class="header__order_to">
-        <span>Доставка у </span>
-        <button>Місто</button>
+        <span>Доставка піци </span>
+        <button (click)="openPopup()">
+          {{ (selectedCity$ | async)?.name || "Місто" }}
+        </button>
       </span>
     </div>
     <div class="header__cart">
       <a routerLink="/cart" class="button button--cart">
-        <span>{{ totalPrice }} ₴</span>
+        <span>{{ totalPrice$ | async }} ₴</span>
         <div class="button__delimiter"></div>
         <svg
           width="18"
@@ -51,7 +53,7 @@
             stroke-linejoin="round"
           />
         </svg>
-        <span>{{ totalCount }}</span>
+        <span>{{ totalCount$ | async }}</span>
       </a>
     </div>
   </div>
