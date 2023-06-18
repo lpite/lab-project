@@ -8,6 +8,9 @@ import { selectPizzas, selectTotalPrice } from '../store/cart/cart.selectors';
 import { CartPizza } from '../store/cart/cart.reducer';
 import { Router } from '@angular/router';
 import { clearCart } from '../store/cart/cart.actions';
+import { Pizzeria } from '../types/Pizzeria';
+import { City, cityValidator } from '../types/City';
+import { PopUpService } from '../select-city-popup/select-city-popup.service';
 
 @Component({
   selector: 'app-checkout-page',
@@ -30,13 +33,19 @@ export class CheckoutPageComponent implements OnInit {
   });
   pizzas$: Observable<CartPizza[]> = this.store.select(selectPizzas);
   cartTotalPrice$: Observable<number> = this.store.select(selectTotalPrice);
+
+  pizzerias: Pizzeria[] = [];
+
   discountPercentage: number = 0;
   math = Math;
+  selectedCity!: City;
+
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private store: Store<AppStateInterface>,
-    private router: Router
+    private router: Router,
+    private selectCityPopupService: PopUpService
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +54,17 @@ export class CheckoutPageComponent implements OnInit {
         this.router.navigate(['/']);
       }
     });
+    this.selectCityPopupService.getSelectedCity().subscribe((city) => {
+      this.selectedCity = city;
+    });
+
+    this.http
+      .get<Pizzeria[]>(`/api/pizzeria/?cityId=${this.selectedCity.id}`)
+      .subscribe({
+        next: (pizzerias) => {
+          console.log(pizzerias);
+        },
+      });
   }
 
   checkPromoCode(): void {
