@@ -17,6 +17,11 @@ body {
   -webkit-font-smoothing: antialiased;
   color: #232323;
 }
+
+.body--hidden-scroll {
+  overflow: hidden;
+}
+
 a,
 span,
 p,
@@ -636,7 +641,7 @@ body {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
-  width: 210px;
+  width: 215px;
   border-color: #ddd;
 }
 .cart__bottom-buttons .go-back-btn span {
