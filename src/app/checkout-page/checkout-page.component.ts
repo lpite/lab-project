@@ -25,6 +25,7 @@ export class CheckoutPageComponent implements OnInit {
       '+380',
       [Validators.required, Validators.pattern(/\+380\d{3}\d{2}\d{2}\d{2}/gi)],
     ],
+    pizzeriaAddress: ['', Validators.required],
     promoCode: [''],
     paymentMethod: ['credit'],
     cardNumber: [''],
@@ -39,6 +40,20 @@ export class CheckoutPageComponent implements OnInit {
   discountPercentage: number = 0;
   math = Math;
   selectedCity!: City;
+
+  //shitCode start
+  iSshowSelectPizzeriaPopup = false;
+
+  showPopupSelectPizzeria() {
+    this.iSshowSelectPizzeriaPopup = true;
+    console.log('1');
+  }
+
+  hidePopupSelectPizzeria() {
+    this.iSshowSelectPizzeriaPopup = false;
+  }
+
+  //shitCode end
 
   constructor(
     private formBuilder: FormBuilder,
@@ -62,6 +77,8 @@ export class CheckoutPageComponent implements OnInit {
       .get<Pizzeria[]>(`/api/pizzeria/?cityId=${this.selectedCity.id}`)
       .subscribe({
         next: (pizzerias) => {
+          this.pizzerias = pizzerias;
+          // this.checkOutForm.value.pizzeriaAddress = pizzerias[0]?.address || '';
           console.log(pizzerias);
         },
       });

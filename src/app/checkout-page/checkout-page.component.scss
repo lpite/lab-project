@@ -149,3 +149,8 @@
   font-size: 16px;
   font-weight: 500;
 }
+
+.form_input:disabled {
+  background-color: rgb(243, 243, 247);
+  border: 1px solid rgb(211, 213, 222);
+}
