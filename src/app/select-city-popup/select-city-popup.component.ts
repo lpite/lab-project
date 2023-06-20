@@ -43,6 +43,7 @@ export class SelectCityPopupComponent implements OnInit {
       } else {
         this.document.body.classList.remove('body--hidden-scroll');
         this.document.body.style.marginRight = '0';
+        this.searchCities = [];
       }
 
       const savedCity = cityValidator.parse(
