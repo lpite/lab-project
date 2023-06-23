@@ -1,4 +1,4 @@
-<div class="select_city_popup" *ngIf="display$ | async">
+<div class="popup" [ngClass]="{ 'popup--hidden': !(display$ | async) }">
   <div class="body">
     <button class="close_button" (click)="closePopUp()">
       <svg>

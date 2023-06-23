@@ -25,6 +25,7 @@ import { ContactPageComponent } from './contact-page/contact-page.component';
 import { OurTeamPageComponent } from './our-team-page/our-team-page.component';
 import { CheckoutPageComponent } from './checkout-page/checkout-page.component';
 import { SelectCityPopupComponent } from './select-city-popup/select-city-popup.component';
+import { SelectDeliveryTypePopupComponent } from './select-delivery-type-popup/select-delivery-type-popup.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { SelectCityPopupComponent } from './select-city-popup/select-city-popup.
     OurTeamPageComponent,
     CheckoutPageComponent,
     SelectCityPopupComponent,
+    SelectDeliveryTypePopupComponent,
   ],
   imports: [
     BrowserModule,

@@ -45,11 +45,6 @@ export class SelectCityPopupComponent implements OnInit {
         this.document.body.style.marginRight = '0';
         this.searchCities = [];
       }
-
-      const savedCity = cityValidator.parse(
-        JSON.parse(localStorage.getItem('city') || '')
-      );
-      this.popupService.selectCity(savedCity || '');
     });
     this.http
       .get<{

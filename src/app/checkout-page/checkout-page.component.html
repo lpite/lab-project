@@ -22,41 +22,18 @@
             class="form_input"
             type="text"
             [disabled]="true"
-            [value]="checkOutForm.value.pizzeriaAddress"
+            [value]="
+              (selectOrderTypePopupService.getSelectedPizzeria() | async)
+                ?.address
+            "
           />
           <button
             class="change_address_button"
-            (click)="showPopupSelectPizzeria()"
+            (click)="showPopupSelectOrderType()"
           >
             Змінити
           </button>
         </label>
-        <div
-          *ngIf="iSshowSelectPizzeriaPopup"
-          style="
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            height: 200px;
-            width: 200px;
-            border: 1px solid;
-          "
-        >
-          <button (click)="hidePopupSelectPizzeria()">close</button>
-          <label *ngFor="let t of pizzerias;let i = index">
-            <input
-              [checked]="checkOutForm.value.pizzeriaAddress === t.address"
-              type="radio"
-              name="pizzeriaAddress"
-              [value]="t.address"
-              formControlName="pizzeriaAddress"
-            />
-            <span>
-              {{ t.address }}
-
-            </span>
-          </label>
-        </div>
       </div>
       <div class="checkout_promo_form">
         <h2>Промокод</h2>

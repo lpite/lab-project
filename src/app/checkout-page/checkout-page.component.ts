@@ -11,6 +11,7 @@ import { clearCart } from '../store/cart/cart.actions';
 import { Pizzeria } from '../types/Pizzeria';
 import { City, cityValidator } from '../types/City';
 import { PopUpService } from '../select-city-popup/select-city-popup.service';
+import { SelectOrderTypePopupService } from '../select-delivery-type-popup/select-delivery-type-popup.component.service';
 
 @Component({
   selector: 'app-checkout-page',
@@ -25,7 +26,6 @@ export class CheckoutPageComponent implements OnInit {
       '+380',
       [Validators.required, Validators.pattern(/\+380\d{3}\d{2}\d{2}\d{2}/gi)],
     ],
-    pizzeriaAddress: ['', Validators.required],
     promoCode: [''],
     paymentMethod: ['credit'],
     cardNumber: [''],
@@ -35,33 +35,24 @@ export class CheckoutPageComponent implements OnInit {
   pizzas$: Observable<CartPizza[]> = this.store.select(selectPizzas);
   cartTotalPrice$: Observable<number> = this.store.select(selectTotalPrice);
 
-  pizzerias: Pizzeria[] = [];
-
   discountPercentage: number = 0;
   math = Math;
   selectedCity!: City;
 
-  //shitCode start
-  iSshowSelectPizzeriaPopup = false;
-
-  showPopupSelectPizzeria() {
-    this.iSshowSelectPizzeriaPopup = true;
-    console.log('1');
-  }
-
-  hidePopupSelectPizzeria() {
-    this.iSshowSelectPizzeriaPopup = false;
-  }
-
-  //shitCode end
 
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private store: Store<AppStateInterface>,
     private router: Router,
-    private selectCityPopupService: PopUpService
+    private selectCityPopupService: PopUpService,
+    public selectOrderTypePopupService: SelectOrderTypePopupService
   ) {}
+
+  showPopupSelectOrderType() {
+    this.selectOrderTypePopupService.open();
+
+  }
 
   ngOnInit(): void {
     this.cartTotalPrice$.subscribe((cartTotalPrice) => {
@@ -72,16 +63,6 @@ export class CheckoutPageComponent implements OnInit {
     this.selectCityPopupService.getSelectedCity().subscribe((city) => {
       this.selectedCity = city;
     });
-
-    this.http
-      .get<Pizzeria[]>(`/api/pizzeria/?cityId=${this.selectedCity.id}`)
-      .subscribe({
-        next: (pizzerias) => {
-          this.pizzerias = pizzerias;
-          // this.checkOutForm.value.pizzeriaAddress = pizzerias[0]?.address || '';
-          console.log(pizzerias);
-        },
-      });
   }
 
   checkPromoCode(): void {
